@@ -1,6 +1,8 @@
 import express from "express";
 import Valve from "../models/Valve.js";
 
+import { getValves, setValveState } from "../controller/valvesController.js"
+
 const router = express.Router();
 
 // Get all valves

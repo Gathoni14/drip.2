@@ -3,6 +3,7 @@ import Chart from "chart.js/auto";
 import axios from "axios";
 import "../styles.css";
 
+
 export default function Dashboard() {
   const [moisture, setMoisture] = useState(0);
   const [valves, setValves] = useState([]);
@@ -88,9 +89,13 @@ export default function Dashboard() {
   const fetchValves = async () => {
     try {
       const res = await axios.get("http://localhost:5000/valves");
+
+     
+
+      console.log("Valves fetched:", res.data);
       setValves(res.data);
-    } catch (err) {
-      console.error("Error fetching valves:", err);
+    } catch (error) {
+      console.error("Error fetching valves:", error);
     }
   };
 
@@ -104,8 +109,10 @@ export default function Dashboard() {
     }
   };
 
+
+  // load initial state
   useEffect(() => {
-    console.log("Fetched valves:", valves)
+    
     fetchValves();
     fetchSchedules();
   }, []);
@@ -201,7 +208,7 @@ export default function Dashboard() {
 
       {/* Valves */}
       <h2>Valves</h2>
-      <div className="valve-grid">
+      <div className="valve-card">
         {valves.map(v => (
           <div key={v._id} className="card valve-card">
             <h4>{v.name}</h4>
