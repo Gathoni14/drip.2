@@ -23,6 +23,9 @@ export const setValveState = async (req, res) => {
     const valve = await Valve.findById(valveId);
     if (!valve) return res.status(404).json({ message: "Valve not found" });
 
+
+    // update valve state
+
     valve.status = state;
     await valve.save();
 
